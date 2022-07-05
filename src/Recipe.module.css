@@ -45,13 +45,6 @@
     display: flex;
 }
 
-
-/* .recipeCategories ol {
-    padding: 0;
-    list-style: none;
-    display: flex;
-} */
-
 .recipeCard li {
     padding: 5px 10px;
     background: linear-gradient(182deg, #c781f7b3, #af52ee);

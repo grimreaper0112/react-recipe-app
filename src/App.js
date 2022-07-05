@@ -15,13 +15,11 @@ const App = () => {
   const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState('chicken');
+  const [resultStatus, setResultStatus] = useState();
   const [diet, setDiet] = useState('');
   const [health, setHealth] = useState('');
 
 
-  // useEffect(() => {
-  //   getRecipes();
-  // }, [query]);
   useEffect(() => {
     getRecipes();
   }, [query]);
@@ -43,13 +41,19 @@ const App = () => {
     const response = await fetch(REQUEST);
     if (response.ok) {
       const data = await response.json();
-      console.log(data.hits);
+      console.log(data);
       setRecipes(data.hits);
-    }
-    else{
 
+      if ((data.hits).length > 0) {
+        setResultStatus(true);
+      }
+      else{
+        setResultStatus(false);
+      }
     }
-    
+    // else{
+    //   setResultStatus(false);
+    // }
   }
 
   const updateSearch = e => {
@@ -93,20 +97,20 @@ const App = () => {
       </form>
 
       <div className="recipe-cards">
-        {recipes 
-        ? recipes.map(recipe => (
-          <Recipe 
-            key={recipe.recipe.url}
-            title={recipe.recipe.label} 
-            calories={recipe.recipe.calories} 
-            image={recipe.recipe.image}
-            cuisineType={recipe.recipe.cuisineType}
-            mealType={recipe.recipe.mealType}
-            dishType={recipe.recipe.dishType}
-            source={recipe.recipe.source}
-            url={recipe.recipe.url} />
-          ))
-        : <p>NO REULTS FOUND</p>
+        {resultStatus ? 
+          recipes.map(recipe => (
+            <Recipe 
+              key={recipe.recipe.url}
+              title={recipe.recipe.label} 
+              calories={recipe.recipe.calories} 
+              image={recipe.recipe.image}
+              cuisineType={recipe.recipe.cuisineType}
+              mealType={recipe.recipe.mealType}
+              dishType={recipe.recipe.dishType}
+              source={recipe.recipe.source}
+              url={recipe.recipe.url} />
+          ))  : 
+          <p id='no-result'>Sorry Nothing Came UP :(</p>
         }
       </div>
     </div>
