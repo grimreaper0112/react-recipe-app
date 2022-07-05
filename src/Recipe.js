@@ -1,18 +1,18 @@
 import React from "react";
 import style from "./Recipe.module.css"
 
-const Recipe = ({title, calories, image, cuisineType, mealType, dishType, source, url}) => {
+const Recipe = (props) => {
     return(
-        <a className={style.recipeCard} href={url} >
-            <img src={image} alt={title} />
+        <a className={style.recipeCard} href={props.url} >
+            <img src={props.image} alt={props.title} />
             <div>
-                <h1>{title}</h1>
-                <p>Source: {source}<br/>{calories.toFixed(2)} calories</p>
+                <h1>{props.title}</h1>
+                <p>Source: {props.source}<br/>{props.calories.toFixed(2)} calories</p>
             </div>
             <ol className="recipeCategories">
-                <li>{cuisineType}</li>
-                <li>{mealType}</li>
-                <li>{dishType}</li>
+                <li>{props.cuisineType}</li>
+                <li>{props.mealType}</li>
+                <li>{props.dishType}</li>
             </ol>
         </a>
     )
