@@ -51,9 +51,6 @@ const App = () => {
         setResultStatus(false);
       }
     }
-    // else{
-    //   setResultStatus(false);
-    // }
   }
 
   const updateSearch = e => {
